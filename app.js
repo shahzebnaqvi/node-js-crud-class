@@ -1,9 +1,39 @@
 const express = require('express')
 var bodyParser = require('body-parser')
-
+const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
+const {getUsers,addUsers}= require('/controllers/userController');
+
+mongoose.connect('mongodb+srv://shahzeb:vfHJzUvakWvhr1Ht@cluster0.8hhwh.mongodb.net/')
+  .then(() => console.log('Connected!')).catch((err)=>console.log(err));
+  app.get('/getUsers', getUsers);  
+  app.get('/addUsers', addUsers);
+
+
+
+
+
+
+
+
+
+
+
 const productData = [{ "Productname": "Mobile" }, { "Productname": "Mobile" }, { "Productname": "Laptop" }, { "Productname": "Mobile" },];
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/home', function (req, res) {
     const number1 = 33;
     console.log(`Hello Home ${number1}`);
@@ -27,7 +57,7 @@ app.get('/users', (req, res) => {
     res.send(users)
 });
 app.post('/addusers', (req, res) => {
-    const querydata =req.query;
+    // const querydata =req.query;
     users.push(req.body);
     res.status(200).send({status:true,message:"User Data Added",data:users})
 });
